@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<body>
+	<script type="text/javascript">
+	function median(data){
+		var key = data[0],
+		    xArray = [],
+		    yArray = [],
+		    currentIndex = (data.length)/2,
+		    tempArray1 = [],
+		    tempArray2 = [];
+		function sortQuick(data,currentIndex){
+			for(var i=0; i<data.length; i++){
+				if(data[i]<key){
+					tempArray1.push(data[i]);
+				}else if(data[i]>key){
+					tempArray2.push(data[i]);
+				}
+			}
+			xArray = tempArray1;
+			yArray = tempArray2;
+
+			tempArray1 = [];
+			tempArray2 = [];
+			console.log(xArray);
+			console.log(yArray);
+			console.log(currentIndex);
+			if(xArray.length >= currentIndex){
+				if(yArray.length === 0){
+					key = xArray[xArray.length-1];
+					if(xArray.length === 1){
+						return xArray[0];
+					}
+				}
+				return sortQuick(xArray,currentIndex);
+			}else if(xArray.length < currentIndex){
+				if(xArray.length === 0){
+					key = yArray[yArray.length-1];
+					if(yArray.length === 1){
+						return yArray[0];
+					}
+				}
+				currentIndex = currentIndex - xArray.length -1;
+				return sortQuick(yArray,currentIndex);
+			}
+
+		}
+		return sortQuick(data,currentIndex);
+		
+	}
+
+    var testArray = [45,19,23,45,67,12,22,35,34,36,67,33,44,89];
+    var test = median(testArray);
+    console.log(test);
+</script>
+</body>
+</html>
